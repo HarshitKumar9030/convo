@@ -1,0 +1,7 @@
+name: convo
+region: nyc1
+services:
+  - name: web
+    run_command: python app.py
+    build_command: pip install -r requirements.txt
+    source_dir: /convo

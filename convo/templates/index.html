@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convo</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.2/dist/full.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-8 bg-base-200">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-primary mb-2">💬 Smart Conversation Generator</h1>
+            <p class="text-gray-600">Craft perfect dialogues using AI</p>
+        </div>
+
+        <!-- Main Form -->
+        <div class="card bg-base-100 shadow-xl mb-8">
+            <div class="card-body">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Left Column -->
+                    <div class="space-y-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Relationship Duration</span>
+                                <span class="label-text-alt" id="durationValue">6 months</span>
+                            </label>
+                            <input type="range" min="1" max="36" value="6" 
+                                   class="range range-primary" 
+                                   name="duration" id="duration">
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Conversation Tone</span>
+                            </label>
+                            <select class="select select-bordered" name="tone">
+                                <option>Playful</option>
+                                <option>Deep</option>
+                                <option>Flirty</option>
+                                <option>Nostalgic</option>
+                                <option>Philosophical</option>
+                            </select>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Question Type</span>
+                            </label>
+                            <select class="select select-bordered" name="question_type">
+                                <option>Conversational</option>
+                                <option>Hypothetical</option>
+                                <option>Reflective</option>
+                                <option>Funny</option>
+                                <option>Deep</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="space-y-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Number of Questions</span>
+                            </label>
+                            <input type="number" min="1" max="10" value="3"
+                                   class="input input-bordered" 
+                                   name="question_count" id="question_count">
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Complexity Level</span>
+                            </label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center gap-2">
+                                    <input type="radio" name="complexity" 
+                                           class="radio radio-primary" value="simple" checked>
+                                    Simple
+                                </label>
+                                <label class="flex items-center gap-2">
+                                    <input type="radio" name="complexity" 
+                                           class="radio radio-primary" value="medium">
+                                    Medium
+                                </label>
+                                <label class="flex items-center gap-2">
+                                    <input type="radio" name="complexity" 
+                                           class="radio radio-primary" value="complex">
+                                    Complex
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="cursor-pointer label">
+                                <span class="label-text">Include Emojis</span> 
+                                <input type="checkbox" 
+                                       class="toggle toggle-primary" 
+                                       name="emojis" id="emojis" checked>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Options -->
+                <div class="collapse collapse-plus">
+                    <input type="checkbox" id="advancedToggle"> 
+                    <div class="collapse-title text-xl font-medium">
+                        Advanced Settings
+                    </div>
+                    <div class="collapse-content">
+                        <div class="space-y-4">
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Max Question Length</span>
+                                    <span class="label-text-alt" id="lengthValue">120 chars</span>
+                                </label>
+                                <input type="range" min="50" max="300" value="120"
+                                       class="range range-secondary" 
+                                       name="max_length" id="max_length">
+                            </div>
+
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Language</span>
+                                </label>
+                                <select class="select select-bordered" name="language" id="language">
+                                    <option>English</option>
+                                    <option>Spanish</option>
+                                    <option>French</option>
+                                    <option>Hindi</option>
+                                    <option>Custom...</option>
+                                </select>
+                            </div>
+
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Interests</span>
+                                </label>
+                                <div class="flex flex-wrap gap-3" id="interestsContainer">
+                                    <label class="cursor-pointer badge badge-lg gap-2">
+                                        <input type="checkbox" value="Music" class="checkbox checkbox-xs" name="interests">
+                                        Music
+                                    </label>
+                                    <label class="cursor-pointer badge badge-lg gap-2">
+                                        <input type="checkbox" value="Travel" class="checkbox checkbox-xs" name="interests">
+                                        Travel
+                                    </label>
+                                    <label class="cursor-pointer badge badge-lg gap-2">
+                                        <input type="checkbox" value="Movies" class="checkbox checkbox-xs" name="interests">
+                                        Movies
+                                    </label>
+                                    <label class="cursor-pointer badge badge-lg gap-2">
+                                        <input type="checkbox" value="Food" class="checkbox checkbox-xs" name="interests">
+                                        Food
+                                    </label>
+                                    <label class="cursor-pointer badge badge-lg gap-2">
+                                        <input type="checkbox" value="Sports" class="checkbox checkbox-xs" name="interests">
+                                        Sports
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Last Conversation Topic</span>
+                                </label>
+                                <input type="text" class="input input-bordered" 
+                                       name="last_topic" id="last_topic" 
+                                       placeholder="What did you last talk about?">
+                            </div>
+
+                            <div class="form-control">
+                                <label class="label">
+                                    <span class="label-text">Custom Instructions</span>
+                                </label>
+                                <textarea class="textarea textarea-bordered" 
+                                          name="custom_prompt" id="custom_prompt"
+                                          placeholder="E.g.: Include movie references"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary mt-6" onclick="generateQuestions()">
+                    Generate Questions ✨
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="hidden">
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">Generated Questions</h2>
+                    <div id="questionsOutput" class="space-y-4"></div>
+                    <div class="mt-6 flex gap-4">
+                        <button class="btn btn-success" onclick="downloadQuestions()">
+                            Download 📥
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="mt-8" id="historySection">
+            <h3 class="text-xl font-bold mb-4">Generation History</h3>
+            <div id="historyList" class="space-y-4"></div>
+        </div>
+    </div>
+
+    <script>
+    // Helper functions
+    const getValue = (selector, defaultValue = '') => {
+        const element = document.querySelector(selector);
+        return element ? element.value : defaultValue;
+    };
+
+    const getCheckedValues = (name) => {
+        return Array.from(document.querySelectorAll(`[name="${name}"]:checked`))
+                   .map(cb => cb.value);
+    };
+
+    // Main generation function
+    async function generateQuestions() {
+        const formData = {
+            duration: getValue('#duration', 6),
+            tone: getValue('[name="tone"]', 'Playful'),
+            question_count: getValue('#question_count', 3),
+            question_type: getValue('[name="question_type"]', 'conversational'),
+            complexity: document.querySelector('[name="complexity"]:checked')?.value || 'medium',
+            max_length: getValue('#max_length', 120),
+            emojis: document.querySelector('#emojis')?.checked || true,
+            language: getValue('#language', 'English'),
+            interests: getCheckedValues('interests'),
+            last_topic: getValue('#last_topic', ''),
+            custom_prompt: getValue('#custom_prompt', '')
+        };
+
+        if (!formData.last_topic) {
+            alert('Please enter a last conversation topic');
+            return;
+        }
+
+        try {
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            
+            const data = await response.json();
+            if(data.error) throw new Error(data.error);
+
+            displayResults(data);
+            updateHistory();
+        } catch(error) {
+            alert(`Error: ${error.message}`);
+        }
+    }
+
+    // Display results
+    function displayResults(data) {
+        const output = document.getElementById('questionsOutput');
+        output.innerHTML = data.questions.split('\n').map(q => 
+            `<div class="chat chat-start">
+                <div class="chat-bubble chat-bubble-primary">${q.trim()}</div>
+            </div>`
+        ).join('');
+        
+        document.getElementById('results').classList.remove('hidden');
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    // Download handler
+    async function downloadQuestions() {
+        const text = document.getElementById('questionsOutput').textContent;
+        
+        try {
+            const response = await fetch('/download', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ text })
+            });
+            
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'conversation_starters.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        } catch(error) {
+            alert('Download failed: ' + error.message);
+        }
+    }
+
+    // History management
+    async function updateHistory() {
+        try {
+            const response = await fetch('/history');
+            const history = await response.json();
+            
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = history.map((entry, index) => `
+                <div class="collapse collapse-plus bg-base-100">
+                    <input type="checkbox"> 
+                    <div class="collapse-title">
+                        Generation #${index + 1} - ${entry.context.tone}
+                    </div>
+                    <div class="collapse-content">
+                        <pre>${entry.questions}</pre>
+                    </div>
+                </div>
+            `).join('');
+            
+        } catch(error) {
+            console.error('Error loading history:', error);
+        }
+    }
+
+    // Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+        // Update range displays
+        const updateRangeDisplay = () => {
+            document.getElementById('durationValue').textContent = 
+                `${getValue('#duration', 6)} months`;
+            
+            document.getElementById('lengthValue').textContent = 
+                `${getValue('#max_length', 120)} chars`;
+        };
+
+        // Event listeners
+        document.getElementById('duration').addEventListener('input', updateRangeDisplay);
+        document.getElementById('max_length').addEventListener('input', updateRangeDisplay);
+        
+        // Initial update
+        updateRangeDisplay();
+        updateHistory();
+    });
+    </script>
+</body>
+</html>
